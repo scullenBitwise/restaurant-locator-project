@@ -1,19 +1,21 @@
-# Employee Directory React Project
+# Restaurant Locator React Project
 
 #### [Description](#description) | [Demo](#demo) | [Getting Started](#getting-started) | [Requirements](#requirements) | [Bonuses](#bonuses)
 
 ---------
 
 ## Description:
-Over the next few days, you and a partner will be building a React app similar to the demo seen below. This app will firm up your existing knowledge of the React basics (components, JSX, props, state, events) and also utilize newer skills like controlled forms, custom component methods, the `useEffect()` hook, and API calls. Each pair will collaborate on a shared GitHub repository, and each person should contribute roughly half of the code contained within the repository. Although you will be working most closely with your partner, you are both encouraged to work with the rest of the team to discuss strategy, debug issues, review code, etc.
+Over the next few days, you and a partner will be building a React app similar to the demo seen below. This app will firm up your existing knowledge of the React basics (components, JSX, props, event handling, using forms, making API calls, the useState and useEffect hooks) and also utilize newer skills like handling styles using Styled-Components and conditionally-rendering components using React-Router-DOM. Each pair will collaborate on a shared GitHub repository, and each person should contribute roughly half of the code contained within the repository. Although you will be working most closely with your partner, you are both encouraged to work with the rest of the team to discuss strategy, debug issues, review code, etc.
 
-Below you will see a demo of an Employee Directory app that allows searching and sorting of a list of employees, and the ability to add a new employee to the list. **Note that your app does not need to be an employee directory in particular:** you and your partner may choose to make a contact list app, a budget management app, a searchable pet adoption app, etc etc etc. So long as the app you create meets the [core requirements](#requirements) listed below, feel free to choose an idea that you and your partner are excited to build!
+Below you will see a demo of Restaurant Locator app that initially loads Yelp restaurant data for a hardcoded location (Denver), and shows this data both as results list items and as pushpins on a Leaflet map. A user can then click on list items to be directed to the restaurant details page, or search for restaurants in a new location.
+
+**Note that your app does not need to be a restaurant locator in particular:** you and your partner may choose to make a brewery locator app, a business locator app, a meteorite-landing site map, a crime incident location map, etc etc etc. So long as the app you create meets the [core requirements](#requirements) listed below, feel free to choose an idea that you and your partner are excited to build!
 
 ---------
 
 ## Demo:
 
-![Employee Directory Functionality Demo](employee-directory-demo.gif)
+![Restaurant Locator Functionality Demo](employee-directory-demo.gif)
 
 [View larger version of demo here](https://watch.screencastify.com/v/9EB97BcHHvZw2y7D58UD).
 
@@ -26,6 +28,7 @@ Below you will see a demo of an Employee Directory app that allows searching and
 - [ ] Consider using [Trello](http://trello.com) to create a project board to track tasks, priorities, and deadlines, and for visibility into what each partner is working on. [See here](https://trello.com/b/WjhFXOdJ/demo-project-board) for an example of how one might be organized.
 - [ ] One partner should create a GitHub repository for your app, and should add the other partner **AND** `scullenBitwise` as collaborators. After the repo is set up, work together to set up [branch protections](https://docs.github.com/en/enterprise-server@3.2/repositories/configuring-branches-and-merges-in-your-repository/defining-the-mergeability-of-pull-requests/about-protected-branches) and determine a game plan for Git branching.
 - [ ] **All work should be done within branches, and code should only be moved to your `main`/`master` branch by way of partner-approved pull requests. As you work, do regular adds/commits to give yourself multiple "save points" just in case something goes wrong.**
+- [ ] **Reference the [Git Collaboration Workflow document](https://github.com/scullenBitwise/git-collaboration-workflow) for a list of steps you can use for common Git collaboration tasks!**
 - [ ] Use clear, descriptive, and professional commit messages. (This will make things easier if you ever have to revert to a prior commit, and it looks great to potential employers!)
 - [ ] One partner should use create-react-app to generate a new React app for your app: `npx create-react-app project-name-here`. If you need help getting your project linked up to a GitHub repo, just ask! Once this code has been merged into the `main`/`master` branch, the other partner can clone the repo, create a branch, and get started developing!
 - [ ] Use the demos provided in class for reference. [Here](https://github.com/scullenBitwise/react-apprenticeship) is a link to the full demo repo.
@@ -37,25 +40,31 @@ Below you will see a demo of an Employee Directory app that allows searching and
 
 ## Requirements:
 
+- may need cors proxy... some APIs don't work without a back-end... use styled components
+- [ ] Your app should use the package `react-router-dom` for conditional rendering of your different "page" elements.
+- [ ] Your app should use a React-specific mapping package and load search results onto the map as pushpins. Look into npm packages like [React Leaflet](https://react-leaflet.js.org/), [React Google Maps](https://www.npmjs.com/package/@react-google-maps/api), [Pigeon Maps](https://www.npmjs.com/package/pigeon-maps), [Here Maps React](https://www.npmjs.com/package/here-maps-react-v2), etc. Note that not all mapping APIs are free, so read the fine print!
+- [ ] Your app should have a search bar that allows a user to specify a new location to search in. After user search, the map should recenter and show results in the new location.
+- [ ] Pull data from your external API using `axios`, `fetch`, or a similar tool. Make sure that your app runs a search for results in the default location upon render, displays search results, and displays pushpins for those results on the map!
+- [ ] Your app should have a separate location details "page" that the user can click through to by clicking on a search result (and maybe even by clicking on a map pushpin). This location details component should NOT receive its data via props and should instead use `useEffect()` to pull location details from the API upon initial render. See the [Blog App Demo](https://github.com/scullenBitwise/react-apprenticeship/tree/main/react/11_react-router/3_blog-app) for an example of how to accomplish this.
+- [ ] Your app should use `styled-components` for styling rather than scss/regular css.
+- [ ] Hide any API keys using a `.env` file. Remember to add the `.env` file to your `.gitignore` so that it is not uploaded to GitHub!
 - [ ] Your app should have multiple components. Use props to pass data from parent components into child components to allow customization of the child components. (Sometimes it's easiest to start with one or two big components, and to break code out into smaller, more specific components after the core functionality is in place.)
-- [ ] Your app should start with an array of data either contained in an in-project `.json` file, or should request data from an external API on initial render. This data should be saved in state.
-- [ ] Your app should allow the user to add a new item by completing and submitting an HTML form.
-- [ ] Your form should include at least one less traditional form field type: select menu, radio buttons, checkboxes, date input, etc.
-- [ ] Use controlled form elements so that as soon as the values stored in the form fields change, the corresponding state value is updated. For this project, you and your partner should handle all form logic by hand and should not use React form libraries like `Formik` or `React Hook Form`.
-- [ ] Your form's `submit` button should be disabled until the user has completed all of the required fields.
-- [ ] Your app should use a table (or similar structure) to render the data in the app in an understandable fashion.
-- [ ] Your app should have a search field that filters the data displayed to match the search term.
-- [ ] Your app should allow sorting of the data on at least one field, both ascending and descending.
 - [ ] Make your code as DRY (**D**on't **R**epeat **Y**ourself) as possible!
 
 ---------
 
 ## Bonuses:
 
-- [ ] Add in detailed input validation, and display error messages and conditional error styling when appropriate.
-- [ ] Implement functionality to allow deletion and/or editing of an item.
-- [ ] Use localStorage or Firebase to store and update your app's data to allow data persistence.
+- [ ] Allow the user to customize their search by providing additional fields (categories, sort radius, etc)
+- [ ] Add filters and/or sort capability to allow the user to customize the search results they see.
+- [ ] Have your app auto-detect a user's location on render (if that feature is enabled on the user's end) and use this location to render the initial search results/map pushpins.
+- [ ] If your API provides rating data, implement a star display widget (or build the code yourself)!
+- [ ] If your API provides photos urls that are pertinent to your app, consider implementing a photo carousel on your result details page.
+- [ ] Implement different pushpin/marker styles based on search result categories or whether a search result is current "active."
+- [ ] Look into infinite scrolling or pagination, so that only the first `x` results are pulled from the API initially and rendered, and calls for additional results are made as the user clicks to the next page or scrolls to the bottom of the existing search results.
+- [ ] Consider implementing autocomplete functionality on your search field. (Use an autocomplete API for this.)
+- [ ] Look into implementing driving directions to the selected search result using a directions API.
 - [ ] Practice using [Bitwise's official commit message format](https://github.com/Shift3/standards-and-practices/blob/main/standards/commits.md).
 - [ ] Deploy your app to GitHub Pages, Netlify, or a similar service and share the url with your team so we can all try it!
 - [ ] Write a detailed README.md file using best practices: [README Template](https://gist.github.com/PurpleBooth/109311bb0361f32d87a2)
-- [ ] Learn a different technique for styling in React! Consider tools like [Tailwind CSS](https://tailwindcss.com/), [Styled Components](https://styled-components.com/), [React Materialize](https://madewithreactjs.com/react-materialize), [Reactstrap](https://reactstrap.github.io/?path=/story/home-installation--page), etc.
+- [ ] Look into using [Storybook](https://storybook.js.org/docs/react/get-started/introduction) as a tool for building, standardizing, and documenting your React components in isolation.
